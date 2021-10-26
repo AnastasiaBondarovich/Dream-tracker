@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import hero_bg from '../Assets/Images/hero_bg.jpg';
-import hero_texture from '../Assets/Images/hero_texture.png';
 import DreamLogo from '../Assets/Images/DreamLogo.png';
 import camera from '../Assets/Images/camera.png';
 import { Link } from 'react-router-dom';
@@ -30,28 +29,14 @@ const StyledMainLayout = styled.div`
     content: "";
     width: 100%;
     height: 100%;
-    background-color: #BF7DE2;
-    opacity: 0.18;
+    background-color: rgba(2, 2, 2, 0.7);
+    // opacity: 0.4;
     position: absolute;
     display: block;
     // left: 0;
     z-index: -1;
   }
 }
-
-  .texture {
-    width: 100%;
-    height: 100%;
-    background: url(${hero_texture});
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    opacity: 0.4;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-  }
 
   .header {
     height: 6.3125rem;
@@ -66,7 +51,7 @@ const StyledMainLayout = styled.div`
     margin: auto;
     // position: sticky;
     // z-index: 15;
-    border-bottom: 1px solid rgba(108, 99, 255, 0.3);
+    border-bottom: 1px solid rgba(108, 99, 255, 0.2);
     z-index: 10;
   }
 
@@ -172,7 +157,6 @@ const MainLayout = (props) => {
         </div>
         {/* <div className={'footer'}>Footer</div> */}
       </div>
-      <div className={'texture'}></div>
     </StyledMainLayout>
   );
 };
