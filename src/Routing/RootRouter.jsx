@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import MainScene from '../Scenes/MainScene';
+import WishBoardScene from 'Scenes/WishBoardScene';
+import MainScene from 'Scenes/MainScene';
 
 
 const RootRouter = () => {
@@ -10,7 +11,10 @@ const RootRouter = () => {
         <Route path={"/dream-tracker"}>
           <MainScene/>
         </Route>
-        <Route path={"/"}>
+        <Route path={"/wish-board"}>
+          <WishBoardScene/>
+        </Route>
+        <Route exact path={"/"}>
           <Redirect to={"/dream-tracker"}/>
         </Route>
       </Switch>

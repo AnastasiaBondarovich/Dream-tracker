@@ -1,17 +1,22 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import MainLayout from './Layouts/MainLayout';
-import RootRouter from './Routing/RootRouter';
+import GlobalModalProvider from 'HOC/GlobalModalProvider';
+import MainLayout from 'Layouts/MainLayout';
+import RootRouter from 'Routing/RootRouter';
 
 
 
 const App = (props) => {
   return (
-    <BrowserRouter>
-      <MainLayout>
-        <RootRouter/>
-      </MainLayout>
-    </BrowserRouter>
+    <React.Fragment>
+      <BrowserRouter>
+        <GlobalModalProvider>
+          <MainLayout>
+            <RootRouter/>
+          </MainLayout>
+        </GlobalModalProvider>
+      </BrowserRouter>
+    </React.Fragment>
   );
 };
 

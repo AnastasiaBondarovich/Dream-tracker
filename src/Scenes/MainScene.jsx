@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
-import build_your__home from '../Assets/Images/build_your__home.png';
-import DreamLogo from '../Assets/Images/DreamLogo.png';
+import build_your__home from 'Assets/Images/build_your__home.png';
+import DreamLogo from 'Assets/Images/DreamLogo.png';
+import { ModalContext } from 'HOC/GlobalModalProvider';
+import RegistrationWindow from 'Components/ModalContent/RegistrationWindow';
 
 const StyledMainScene = styled.div`
-
   .card-row-wrapper {
     display: flex;
     flex-direction: row;
@@ -41,17 +42,17 @@ const StyledMainScene = styled.div`
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
     font-size: 35px;
-    color: #3F3D56;
+    color: #3f3d56;
     text-shadow: 1px 1px 2px #ffff, 0 0 1em #ffff, 0 0 0.2em #ffff;
     margin-bottom: 40px;
   }
 
-  .title-item_description{
+  .title-item_description {
     width: 600px;
     font-family: 'Roboto', sans-serif;
     font-size: 1rem;
     line-height: 1.5;
-    color: #FFFFFF;
+    color: #ffffff;
   }
 
   .register-item {
@@ -73,7 +74,7 @@ const StyledMainScene = styled.div`
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
     font-size: 20px;
-    color: #0023C4;
+    color: #0023c4;
   }
 
   .register-item_picture {
@@ -81,43 +82,73 @@ const StyledMainScene = styled.div`
     width: 281.2px;
   }
 
-  .register-button, .sign-button {
+  .register-button,
+  .sign-button {
     height: 64px;
     width: 280px;
-    background: #BF7DE2;
+    background: #bf7de2;
     border-radius: 38px;
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
     font-size: 20px;
-    color: #FFFFFF;
+    color: #ffffff;
   }
+`;
 
-`
+const MainScene = () => {
+  const setModalContent = useContext(ModalContext);
 
-const MainScene = (props) => {
   return (
     <StyledMainScene>
       <div className={'content-row'}>
         <div className={'title-item'}>
           <h3>Visualization is an exercise for the brain</h3>
           <div className={'title-item_description'}>
-            <p>You can visualize before going to bed, while brushing your teeth, before practice, while walking, etc.</p><br/>
-            <p>The more you visualize, the more successful you will be in training your brain to believe in your desired outcome.</p><br/>
-            <p>Try to practice visualizing every day. Make it a habit in your day and decide on the number of times you will repeat this visualization. </p><br/>
-            <p>The more you repeat the scenario in your head, the easier it will be for you to picture it and to believe it.</p>
+            <p>
+              You can visualize before going to bed, while brushing your teeth,
+              before practice, while walking, etc.
+            </p>
+            <br />
+            <p>
+              The more you visualize, the more successful you will be in
+              training your brain to believe in your desired outcome.
+            </p>
+            <br />
+            <p>
+              Try to practice visualizing every day. Make it a habit in your day
+              and decide on the number of times you will repeat this
+              visualization.{' '}
+            </p>
+            <br />
+            <p>
+              The more you repeat the scenario in your head, the easier it will
+              be for you to picture it and to believe it.
+            </p>
           </div>
         </div>
         <div className={'register-item'}>
-          <h4 className={'register-item_title'}>Create the reality you truly desire!</h4>
-          <img className={'register-item_picture'} src={build_your__home} alt={"Home"}/>
-          <button className={'register-button'}>Register</button>
+          <h4 className={'register-item_title'}>
+            Create the reality you truly desire!
+          </h4>
+          <img
+            className={'register-item_picture'}
+            src={build_your__home}
+            alt={'Home'}
+          />
+          <button
+            onClick={() => {
+              setModalContent(<RegistrationWindow />), console.log('click');
+            }}
+            className={'register-button'}
+          >
+            Register
+          </button>
           <button className={'sign-button'}>Sign in</button>
-          <img src={DreamLogo} alt={"DreamLogo"}/>
+          <img src={DreamLogo} alt={'DreamLogo'} />
         </div>
       </div>
-
     </StyledMainScene>
-  )
-}
+  );
+};
 
 export default MainScene;
