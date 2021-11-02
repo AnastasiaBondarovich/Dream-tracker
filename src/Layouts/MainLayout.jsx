@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import hero_bg from 'Assets/Images/hero_bg.jpg';
 import DreamLogo from 'Assets/Images/DreamLogo.png';
+import { useSelector } from 'react-redux';
+import { usersSelector } from '../store/selectors/users';
 
 const StyledMainLayout = styled.div`
   min-height: 100vh;
@@ -18,7 +20,7 @@ const StyledMainLayout = styled.div`
   width: 100%;
   height: 100%;
   opacity: 0.9;
-  z-index: -2;
+  z-index: 1;
 
   &::after {
     content: "";
@@ -46,6 +48,16 @@ const StyledMainLayout = styled.div`
     z-index: 1;
   }
 
+  .logo-menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .logo-menu_user {
+    margin-left: 10px;
+  }
+
   .navigation-menu {
     margin-left: auto;
     min-width: 390px;
@@ -69,8 +81,8 @@ const StyledMainLayout = styled.div`
     display: inline-block;
 
     &:hover {
-      border-bottom: 2px solid rgba(108, 99, 255, 0.2);
-      transform: scale(1.3);
+      border-bottom: 2px solid rgba(58, 67, 111, 0.85);
+      transform: scale(1.15);
     }
   }
 
@@ -91,12 +103,18 @@ const StyledMainLayout = styled.div`
 `
 
 const MainLayout = (props) => {
+  const users = useSelector(usersSelector);
+  const userLogin = users.map(item => item.login);
+
   return (
     <StyledMainLayout>
       <div className={'container'}>
         <div className={'header'}>
           <div className={'logo-menu'}>
-            <img src={DreamLogo} alt={'DreamLogo'} />
+            <Link to={'/dream-tracker'}>
+              <img src={DreamLogo} alt={'DreamLogo'} />
+            </Link>
+            <Link to={'/settings'} className={'logo-menu_user'}>User login: {userLogin} </Link>
           </div>
           <nav className={'navigation-menu'}>
             <ul className={'point-navigation-menu'}>

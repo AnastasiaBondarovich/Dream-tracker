@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import build_your__home from 'Assets/Images/build_your__home.png';
 import DreamLogo from 'Assets/Images/DreamLogo.png';
-import { ModalContext } from 'HOC/GlobalModalProvider';
-import RegistrationWindow from 'Components/ModalContent/RegistrationWindow';
+import FormMainScene from '../Components/ModalContent/FormMainScene';
+import { useSelector } from 'react-redux';
+import { usersSelector } from '../store/selectors/users';
+import { Link } from 'react-router-dom';
 
 const StyledMainScene = styled.div`
   .card-row-wrapper {
@@ -28,7 +29,7 @@ const StyledMainScene = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    margin: 60px auto 5px;
+    margin: 60px 20px 5px;
   }
 
   .title-item {
@@ -36,6 +37,7 @@ const StyledMainScene = styled.div`
     flex-direction: column;
     justify-content: center;
     text-align: start;
+    margin: 0 10px;
   }
 
   h3 {
@@ -55,48 +57,29 @@ const StyledMainScene = styled.div`
     color: #ffffff;
   }
 
-  .register-item {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    height: 550px;
-    width: 372px;
-    padding: 10px 0 10px;
-    background-color: #ffff;
-    border: 1px solid #666666;
-    box-shadow: 10px 10px 20px rgba(49, 75, 105, 0.3),
-      0 10px 10px rgba(49, 75, 105, 0.3);
-    border-radius: 10px;
+  p {
+    margin-bottom: 30px;
   }
 
-  .register-item_title {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 500;
-    font-size: 20px;
-    color: #0023c4;
-  }
-
-  .register-item_picture {
-    height: 147.01px;
-    width: 281.2px;
-  }
-
-  .register-button,
-  .sign-button {
+  .create-button {
     height: 64px;
     width: 280px;
     background: #bf7de2;
     border-radius: 38px;
+  }
+
+  .create-link{
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
     font-size: 20px;
     color: #ffffff;
   }
+  
 `;
 
 const MainScene = () => {
-  const setModalContent = useContext(ModalContext);
+  const users = useSelector(usersSelector);
+  console.log(users);
 
   return (
     <StyledMainScene>
@@ -108,44 +91,29 @@ const MainScene = () => {
               You can visualize before going to bed, while brushing your teeth,
               before practice, while walking, etc.
             </p>
-            <br />
             <p>
               The more you visualize, the more successful you will be in
               training your brain to believe in your desired outcome.
             </p>
-            <br />
             <p>
               Try to practice visualizing every day. Make it a habit in your day
               and decide on the number of times you will repeat this
               visualization.{' '}
             </p>
-            <br />
             <p>
               The more you repeat the scenario in your head, the easier it will
               be for you to picture it and to believe it.
             </p>
+            {users.find(item => item.isUserLoggedIn === true) && (
+              <button className={'create-button'}>
+                <Link to={'/wish-board'} className={'create-link'}>Let's start to create</Link>
+              </button>
+            )}
           </div>
         </div>
-        <div className={'register-item'}>
-          <h4 className={'register-item_title'}>
-            Create the reality you truly desire!
-          </h4>
-          <img
-            className={'register-item_picture'}
-            src={build_your__home}
-            alt={'Home'}
-          />
-          <button
-            onClick={() => {
-              setModalContent(<RegistrationWindow />), console.log('click');
-            }}
-            className={'register-button'}
-          >
-            Register
-          </button>
-          <button className={'sign-button'}>Sign in</button>
-          <img src={DreamLogo} alt={'DreamLogo'} />
-        </div>
+        {users === null || users.length === 0 && (
+          <FormMainScene />
+        )}
       </div>
     </StyledMainScene>
   );
