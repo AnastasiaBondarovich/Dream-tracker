@@ -12,11 +12,15 @@ const usersReducer = (state, action) => {
                 email: action.payload.email,
                 password: action.payload.password,
                 isUserLoggedIn: true,
-                id: 15
+                userID: action.payload.userID,
             }
         );
-        console.log(newUser)
         return { ...state, users: newUser};
+
+    case (USERS_ACTIONS.remove) : 
+        newUser = [...state.users];
+        newUser.splice(action.payload, 1);
+        return {...state, users: newUser};
 
     default: return {...state}
 }

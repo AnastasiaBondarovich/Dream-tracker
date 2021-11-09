@@ -2,8 +2,8 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import GlobalModalProvider from 'HOC/GlobalModalProvider';
 import MainLayout from 'Layouts/MainLayout';
-import RootRouter from 'Routing/RootRouter';
 import GlobalStoreProvider from 'HOC/GlobalStoreProvider';
+import LoginRouter from './Routing/LoginRouter';
 
 
 
@@ -14,7 +14,7 @@ const App = (props) => {
         <GlobalStoreProvider>
           <GlobalModalProvider>
             <MainLayout>
-              <RootRouter/>
+              <LoginRouter/>
             </MainLayout>
           </GlobalModalProvider>
         </GlobalStoreProvider>

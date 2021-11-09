@@ -1,36 +1,42 @@
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import WishBoardScene from 'Scenes/WishBoardScene';
-import MainScene from 'Scenes/MainScene';
-import GoalsScene from 'Scenes/GoalsScene';
+import { Switch, Route, Redirect, useParams, useHistory } from 'react-router-dom';
+import WishBoardScene from '../Scenes/WishBoard/WishBoardScene';
+import MainScene from '../Scenes/MainScene/MainScene';
+import GoalsScene from 'Scenes/Goals/GoalsScene';
 import InspirationScene from 'Scenes/InspirationScene';
-import ChooseColor from 'Components/WishBoardContent/ChooseColor';
+import SettingsScene from 'Scenes/SettingsScene';
+import ChooseColor from '../Scenes/WishBoard/Components/ChooseColor';
 import { useSelector } from 'react-redux';
 import { usersSelector } from '../store/selectors/users';
+import { PATHS } from '../constants/paths';
 
-const RootRouter = () => {
+const RootRouter = (props) => {
+  const users = useSelector(usersSelector);
+  const history = useHistory();
+  const params = useParams();
+  const userID = users.map(user => user.userID);
+  console.log ('location', history.location)
+
   return (
     <React.Fragment>
-      <Switch>
-        <Route path={'/dream-tracker'}>
+        <Route exact path={PATHS.Account(userID)}>
           <MainScene />
-        </Route>
-        <Route path={'/wish-board/colors'}>
-          <ChooseColor />
-        </Route>
-        <Route path={'/wish-board'}>
-          <WishBoardScene />
-        </Route>
-        <Route path={'/my-goals'}>
-          <GoalsScene />
-        </Route>
-        <Route path={'/inspiration'}>
-          <InspirationScene />
-        </Route>
-        <Route exact path={'/'}>
-          <Redirect to={'/dream-tracker'} />
-        </Route>
-      </Switch>
+      </Route>
+      <Route path={`${PATHS.Board(userID)}/colors`}>
+        <ChooseColor />
+      </Route>
+      <Route path={PATHS.Board(userID)}>
+        <WishBoardScene />
+      </Route>
+      <Route path={PATHS.Goals(userID)}>
+        <GoalsScene />
+      </Route>
+      <Route path={PATHS.Inspiration(userID)}>
+        <InspirationScene />
+      </Route>
+      <Route path={PATHS.Settings(userID)}>
+        <SettingsScene />
+      </Route>
     </React.Fragment>
   );
 };

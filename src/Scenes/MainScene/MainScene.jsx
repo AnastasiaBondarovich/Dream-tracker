@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import DreamLogo from 'Assets/Images/DreamLogo.png';
-import FormMainScene from '../Components/ModalContent/FormMainScene';
+import FormMainScene from './Components/FormMainScene';
 import { useSelector } from 'react-redux';
-import { usersSelector } from '../store/selectors/users';
+import { usersSelector } from '../../store/selectors/users';
 import { Link } from 'react-router-dom';
+import { PATHS } from '../../constants/paths';
 
 const StyledMainScene = styled.div`
   .card-row-wrapper {
@@ -29,7 +29,7 @@ const StyledMainScene = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    margin: 60px 20px 5px;
+    margin: 5%;
   }
 
   .title-item {
@@ -79,6 +79,7 @@ const StyledMainScene = styled.div`
 
 const MainScene = () => {
   const users = useSelector(usersSelector);
+  const userID = users.map(user => user.userID);
   console.log(users);
 
   return (
@@ -104,9 +105,9 @@ const MainScene = () => {
               The more you repeat the scenario in your head, the easier it will
               be for you to picture it and to believe it.
             </p>
-            {users.find(item => item.isUserLoggedIn === true) && (
+            {users.find(users => users.isUserLoggedIn === true) && (
               <button className={'create-button'}>
-                <Link to={'/wish-board'} className={'create-link'}>Let's start to create</Link>
+                <Link to={PATHS.Board(userID)} className={'create-link'}>Let's start to create</Link>
               </button>
             )}
           </div>

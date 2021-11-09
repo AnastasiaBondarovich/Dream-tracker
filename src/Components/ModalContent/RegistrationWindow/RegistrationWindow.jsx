@@ -2,12 +2,14 @@ import React, { useContext, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { ModalContext } from 'HOC/GlobalModalProvider';
 import { Form, Formik } from 'formik';
-import FormikInput from '../FormikInputs/FormikInput';
-import welcoming from '../../Assets/Images/welcoming.png';
+import FormikInput from '../../FormikInputs/FormikInput';
+import welcoming from 'Assets/Images/ModalWindow/welcoming.png';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
-import { userValidate } from '../functions/userValidate';
-import { PATHS } from '../constants/paths';
+import { userValidate } from './userValidate';
+import { PATHS } from 'constants/paths';
+import { usersSelector } from 'store/selectors/users';
+import { useSelector } from 'react-redux';
 
 const StyledRegistrationWindow = styled.div`
   background-color: #ffffff;
@@ -89,10 +91,12 @@ const StyledRegistrationWindow = styled.div`
 
 const RegistrationWindow = (props) => {
   const setModalContent = useContext(ModalContext);
-  const history = useHistory();
-  const logIn = (id) => {
-    history.push(PATHS.Account(id));
-  };
+
+  // const userID = users.map(user => user.userID);
+  // const history = useHistory();
+  // const logIn = (userID) => {
+  //   history.push(PATHS.Account(userID));
+  // };
 
   return (
     <StyledRegistrationWindow>
@@ -118,9 +122,7 @@ const RegistrationWindow = (props) => {
           onSubmit={(formData) => {
             console.log('form submitted', formData);
             props.addUser(formData.login, formData.email, formData.password);
-            {
-              formData && setModalContent(false);
-            }
+            setModalContent(false);
           }}
           validate={(formData) => userValidate(formData)}
         >
@@ -140,7 +142,7 @@ const RegistrationWindow = (props) => {
               name={'password'}
               size="40"
             />
-            <button onClick={() => {logIn(15)}}
+            <button 
               className={'registration-button'}
               type="submit"
             >

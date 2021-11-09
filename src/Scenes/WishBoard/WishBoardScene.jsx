@@ -1,18 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import color_picker from 'Assets/Images/color_picker.png';
-import zoom from 'Assets/Images/zoom.png';
-import layers from 'Assets/Images/layers.png';
-import library from 'Assets/Images/library.png';
+import color_picker from 'Assets/Images/WishBoardScene/color_picker.png';
+import zoom from 'Assets/Images/WishBoardScene/zoom.png';
+import layers from 'Assets/Images/WishBoardScene/layers.png';
+import library from 'Assets/Images/WishBoardScene/library.png';
+import { PATHS } from '../../constants/paths';
+import { useSelector } from 'react-redux';
+import { usersSelector } from '../../store/selectors/users';
 
 const StyledWishBoardScene = styled.div`
   display: flex;
   flex-direction: column;
-  height: 500px;
-  width: 1000px;
+  min-height: 500px;
+  width: 80%;
   background-color: #fff;
-  margin: 50px auto 50px;
+  margin: 1% auto 0;
 
   h3 {
     margin: 60px auto 80px;
@@ -37,11 +40,14 @@ const StyledWishBoardScene = styled.div`
 `;
 
 const WishBoardScene = () => {
+  const users = useSelector(usersSelector);
+  const userID = users.map(user => user.userID);
+
   return (
     <StyledWishBoardScene>
       <h3>My Wish board</h3>
       <div className={'wish-wrapper'}>
-        <Link to={'/wish-board/colors'}>
+        <Link to={`${PATHS.Board(userID)}/colors`}>
           <img src={color_picker} alt={'Color'} />
           <p>Colors</p>
         </Link>

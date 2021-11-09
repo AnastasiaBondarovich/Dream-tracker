@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import hero_bg from 'Assets/Images/hero_bg.jpg';
-import DreamLogo from 'Assets/Images/DreamLogo.png';
+import hero_bg from 'Assets/Images/MainScene/hero_bg.jpg';
+import DreamLogo from 'Assets/Images/MainScene/DreamLogo.png';
 import { useSelector } from 'react-redux';
 import { usersSelector } from '../store/selectors/users';
+import { PATHS } from 'constants/paths';
 
 const StyledMainLayout = styled.div`
   min-height: 100vh;
@@ -104,37 +105,39 @@ const StyledMainLayout = styled.div`
 
 const MainLayout = (props) => {
   const users = useSelector(usersSelector);
-  const userLogin = users.map(item => item.login);
+  const userID = users.map(user => user.userID);
+  const userLogin = users.map(user => user.login);
+  
 
   return (
     <StyledMainLayout>
       <div className={'container'}>
         <div className={'header'}>
           <div className={'logo-menu'}>
-            <Link to={'/dream-tracker'}>
+            <Link to={PATHS.Account(userID)}>
               <img src={DreamLogo} alt={'DreamLogo'} />
             </Link>
-            <Link to={'/settings'} className={'logo-menu_user'}>User login: {userLogin} </Link>
+            <Link to={'/settings'} className={'logo-menu_user'}>Hello, {userLogin}! </Link>
           </div>
           <nav className={'navigation-menu'}>
             <ul className={'point-navigation-menu'}>
               <li>
-                <Link to={'/wish-board'} className={'point-menu-item'}>
+                <Link to={PATHS.Board(userID)} className={'point-menu-item'}>
                   <h4>Wish board</h4>
                 </Link>
               </li>
               <li>
-                <Link className={'point-menu-item'} to={'/my-goals'}>
+                <Link className={'point-menu-item'} to={PATHS.Goals(userID)}>
                   <h4>My goals</h4>
                 </Link>
               </li>
               <li>
-                <Link className={'point-menu-item'} to={'/inspiration'}>
+                <Link className={'point-menu-item'} to={PATHS.Inspiration(userID)}>
                   <h4>Inspiration</h4>
                 </Link>
               </li>
               <li>
-                <Link className={'point-menu-item'} to={'/settings'}>
+                <Link className={'point-menu-item'} to={PATHS.Settings(userID)}>
                   <h4>Settings</h4>
                 </Link>
               </li>

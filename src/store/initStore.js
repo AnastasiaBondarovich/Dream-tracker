@@ -5,10 +5,15 @@ import storage from 'redux-persist/lib/storage';
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
 import rootReducer from './reducers/rootReducer';
 import usersReducer from './reducers/usersReducer';
+import goalsReducer from './reducers/goalsReducer';
 
 const newUser = [];
+let newGoalsList = [{ taskName: 'Travel to 50 countries'}];
 
-const initialState = { usersReducer: { users: newUser } };
+const initialState = { 
+  usersReducer: { users: newUser }, 
+  goalsReducer: { goals: newGoalsList } 
+};
 
 const persistConfig = {
   key: 'root',

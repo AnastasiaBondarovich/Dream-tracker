@@ -3,7 +3,10 @@ import styled from 'styled-components';
 import { ModalContext } from 'HOC/GlobalModalProvider';
 import { Form, Formik } from 'formik';
 import FormikInput from '../FormikInputs/FormikInput';
-import Powerful from '../../Assets/Images/Powerful.png';
+import Powerful from 'Assets/Images/ModalWindow/Powerful.png';
+import { logInUser } from 'api/apiUsers';
+import { PATHS } from '../../constants/paths';
+import { useHistory } from 'react-router';
 
 const StyledSignInWindow = styled.div`
   background-color: #ffffff;
@@ -84,6 +87,15 @@ const StyledSignInWindow = styled.div`
 
 const SignInWindow = (props) => {
   const setModalContent = useContext(ModalContext);
+  const history = useHistory();
+  const signIn = (userID) => {
+    history.push(PATHS.Account(userID));
+  };
+
+  const signInUser = (email, password, userID) => {
+    logInUser(email, password).then(({ data }) =>
+    {signIn(data), console.log('addUser2', data)}
+    )};
 
   return (
     <StyledSignInWindow>
@@ -104,14 +116,16 @@ const SignInWindow = (props) => {
           initialValues={{}}
           onSubmit={(formData) => {
             console.log('form submitted', formData);
+            signInUser(formData.email, formData.password);
+            setModalContent(false);
           }}
           validate={(formData) => {
-            console.log('formdata', formData);
+            console.log('formdataSign', formData);
             const errorObj = {};
             let isFormValid = true;
 
-            if (!formData.login) {
-              errorObj.login = 'Please input your login';
+            if (!formData.email) {
+              errorObj.email = 'Please input your email';
               isFormValid = false;
             }
             if (!formData.password) {
@@ -124,7 +138,7 @@ const SignInWindow = (props) => {
           <Form>
             <p className={'login-text'}>Your login</p>
             <FormikInput
-              placeholder={'Enter your login'}
+              placeholder={'Enter your email'}
               name={'email'}
               size="40"
             />
