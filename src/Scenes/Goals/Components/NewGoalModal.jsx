@@ -58,19 +58,6 @@ const StyledNewGoalModal = styled.div`
   border-radius: 4px;
 }
 
-#popup-id {
-  /* display: flex;
-  justify-content: flex-start; */
-  box-shadow: 10px 10px 20px rgba(49, 75, 105, 0.3),
-    0 10px 10px rgba(49, 75, 105, 0.3);
-  margin-bottom: 20px;
-  padding: 5px 70px;
-}
-
-#popup-id option:hover {
-  background-color: rgb(0, 162, 255, 0.3);
-}
-
 .buttons-popup {
   display: flex;
   justify-content: space-between;

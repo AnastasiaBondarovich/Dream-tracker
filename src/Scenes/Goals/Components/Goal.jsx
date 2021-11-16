@@ -2,7 +2,7 @@ import React, { useEffect, useContext, memo } from 'react';
 import { ModalContext } from 'HOC/GlobalModalProvider';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import ChangeGoalModal from 'Components/ModalContent/ChangeGoalModal';
+import ChangeGoalModal from './ChangeGoalModal';
 import { removeGoal } from 'store/actions/goals';
 
 

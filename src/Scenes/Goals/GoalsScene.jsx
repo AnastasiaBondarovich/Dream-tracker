@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { goalsSelector } from 'store/selectors/goals';
 import Goal from './Components/Goal';
 import { ModalContext } from 'HOC/GlobalModalProvider';
-import NewGoalModal from 'Components/ModalContent/NewGoalModal';
 import { newGoalsList } from 'store/actions/goals';
 
 const StyleGoalsScene = styled.div`

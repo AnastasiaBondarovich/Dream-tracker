@@ -5,7 +5,6 @@ import MainScene from '../Scenes/MainScene/MainScene';
 import GoalsScene from 'Scenes/Goals/GoalsScene';
 import InspirationScene from 'Scenes/InspirationScene';
 import SettingsScene from 'Scenes/SettingsScene';
-import ChooseColor from '../Scenes/WishBoard/Components/ChooseColor';
 import { useSelector } from 'react-redux';
 import { usersSelector } from '../store/selectors/users';
 import { PATHS } from '../constants/paths';
@@ -22,9 +21,9 @@ const RootRouter = (props) => {
         <Route exact path={PATHS.Account(userID)}>
           <MainScene />
       </Route>
-      <Route path={`${PATHS.Board(userID)}/colors`}>
+      {/* <Route path={`${PATHS.Board(userID)}/colors`}>
         <ChooseColor />
-      </Route>
+      </Route> */}
       <Route path={PATHS.Board(userID)}>
         <WishBoardScene />
       </Route>

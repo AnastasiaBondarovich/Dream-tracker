@@ -29,7 +29,7 @@ const StyledMainScene = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    margin: 5%;
+    margin: 5% 5% 0;
   }
 
   .title-item {
@@ -114,7 +114,7 @@ const MainScene = () => {
         </div>
         {users === null || users.length === 0 && (
           <FormMainScene />
-        )}
+        )} 
       </div>
     </StyledMainScene>
   );
