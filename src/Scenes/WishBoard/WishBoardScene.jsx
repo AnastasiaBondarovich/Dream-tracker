@@ -36,7 +36,7 @@ const StyledWishBoardScene = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
-    width: 800px;
+    width: 80%;
     margin: 0 auto 0;
   }
 
@@ -44,6 +44,7 @@ const StyledWishBoardScene = styled.div`
     border: none;
     border-color: #ffff;
     background-color: #ffff;
+    cursor: pointer;
   }
 
   img {

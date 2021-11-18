@@ -2,8 +2,7 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { ModalContext } from 'HOC/GlobalModalProvider';
 import { chooseCategory } from '../../../api/apiBoards';
-import { Field, Form, Formik } from 'formik';
-import FormikInput from '../../../Components/FormikInputs/FormikInput';
+import { Field, Form, Formik, useField } from 'formik';
 
 const StyledChooseCategoryModal = styled.div`
   display: flex;
@@ -139,56 +138,61 @@ const ChooseCategoryModal = () => {
               console.log('addCategory', data);
             }); setModalContent(false);
           }}
+          validate={(formObj) => {
+            const errorObj = {};
+            console.log('formObj', formObj)
+            if (formObj.checked.length % 2) return {checked: [], errorObj: 'Please mark even amount of categories'}            
+          }}
         >
           <Form>
             <div role="group" aria-labelledby="checkbox-group">
               <div className={'buttons-categories_work'}>
                 <label>
-                  <Field type="checkbox" name="checked" value="health" />
+                  <Field type="checkbox" name="checked" value="Health" />
                   Health
                 </label>
                 <label>
-                  <Field type="checkbox" name="checked" value="work" />
+                  <Field type="checkbox" name="checked" value="Work" />
                   Work & Career
                 </label>
               </div>
               <div className={'buttons-categories_family'}>
                 <label>
-                  <Field type="checkbox" name="checked" value="family" />
+                  <Field type="checkbox" name="checked" value="Family" />
                   Family
                 </label>
                 <label>
-                  <Field type="checkbox" name="checked" value="love" />
+                  <Field type="checkbox" name="checked" value="Love" />
                   Love
                 </label>
               </div>
               <div className={'buttons-categories_lifestyle'}>
                 <label>
-                  <Field type="checkbox" name="checked" value="sport" />
+                  <Field type="checkbox" name="checked" value="Sport" />
                   Sport
                 </label>
                 <label>
-                  <Field type="checkbox" name="checked" value="lifestyle" />
+                  <Field type="checkbox" name="checked" value="Lifestyle" />
                   Lifestyle
                 </label>
               </div>
               <div className={'buttons-categories_travel'}>
                 <label>
-                  <Field type="checkbox" name="checked" value="travel" />
+                  <Field type="checkbox" name="checked" value="Travel" />
                   Travel
                 </label>
                 <label>
-                  <Field type="checkbox" name="checked" value="inspiration" />
+                  <Field type="checkbox" name="checked" value="Inspiration" />
                   Inspiration
                 </label>
               </div>
               <div className={'buttons-categories_home'}>
                 <label>
-                  <Field type="checkbox" name="checked" value="home" />
+                  <Field type="checkbox" name="checked" value="Home" />
                   Home
                 </label>
                 <label>
-                  <Field type="checkbox" name="checked" value="fashion" />
+                  <Field type="checkbox" name="checked" value="Fashion" />
                   Fashion
                 </label>
               </div>

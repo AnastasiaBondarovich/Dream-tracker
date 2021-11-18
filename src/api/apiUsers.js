@@ -1,4 +1,4 @@
-// window.localStorage.setItem('registeredUsersList', JSON.stringify([]));
+window.localStorage.setItem('registeredUsersList', JSON.stringify([]));
 
 export const registerUser = (login, email, password) => {
   return new Promise((resolve, reject) => {

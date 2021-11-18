@@ -119,6 +119,7 @@ const GoalsScene = () => {
 
   const addGoal = (newTaskName) => {
     dispatch(newGoalsList(newTaskName));
+    setNewTaskName('');
   };
 
   return (

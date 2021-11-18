@@ -57,6 +57,10 @@ const StyledMainLayout = styled.div`
 
   .logo-menu_user {
     margin-left: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 0.8125rem;
+    color:  #FFFFFF;;
   }
 
   .navigation-menu {
@@ -105,9 +109,10 @@ const StyledMainLayout = styled.div`
 
 const MainLayout = (props) => {
   const users = useSelector(usersSelector);
+  const userList = JSON.parse(localStorage.registeredUsersList);
   const userID = users.map(user => user.userID);
-  const userLogin = users.map(user => user.login);
-  
+  const userData = userList.find(user => user.userID == userID);  
+  console.log('userlist', userData)
 
   return (
     <StyledMainLayout>
@@ -117,7 +122,8 @@ const MainLayout = (props) => {
             <Link to={PATHS.Account(userID)}>
               <img src={DreamLogo} alt={'DreamLogo'} />
             </Link>
-            <Link to={'/settings'} className={'logo-menu_user'}>Hello, {userLogin}! </Link>
+            <Link to={PATHS.Settings(userID)} className={'logo-menu_user'}>Hello,  {userData ? `${userData.login}` : 'Stranger'}! 
+            </Link>
           </div>
           <nav className={'navigation-menu'}>
             <ul className={'point-navigation-menu'}>

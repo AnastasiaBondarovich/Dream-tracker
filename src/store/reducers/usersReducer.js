@@ -17,6 +17,18 @@ const usersReducer = (state, action) => {
         );
         return { ...state, users: newUser};
 
+        case (USERS_ACTIONS.login):
+            newUser = [...state.users];
+        newUser.push(
+            {
+                email: action.payload.email,
+                password: action.payload.password,
+                isUserLoggedIn: true,
+                userID: action.payload.userID,
+            }
+        );
+            return { ...state, users: newUser };
+
     case (USERS_ACTIONS.remove) : 
         newUser = [...state.users];
         newUser.splice(action.payload, 1);

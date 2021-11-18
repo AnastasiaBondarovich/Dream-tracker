@@ -8,6 +8,19 @@ export const newUser = (login, email, password, userID) => {return ({type: USERS
       userID: userID
   }})}
 
+  export const login = (email, password, userID) => {
+    return (
+        {
+            type: USERS_ACTIONS.login,
+            payload: {
+              email: email,
+              password: password,
+              userID: userID
+            }
+        }
+    )
+};
+
 export const removeUser = (index) => {return ({type: USERS_ACTIONS.remove,
     payload: index
   })}

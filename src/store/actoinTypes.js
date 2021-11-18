@@ -1,5 +1,6 @@
 export const USERS_ACTIONS = {
   add: 'add_new_user',
+  login: 'login_user',
   remove: 'remove_user',
 };
 

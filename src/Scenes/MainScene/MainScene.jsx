@@ -63,7 +63,7 @@ const StyledMainScene = styled.div`
 
   .create-button {
     height: 64px;
-    width: 280px;
+    width: 350px;
     background: #bf7de2;
     border-radius: 38px;
   }
@@ -107,7 +107,7 @@ const MainScene = () => {
             </p>
             {users.find(users => users.isUserLoggedIn === true) && (
               <button className={'create-button'}>
-                <Link to={PATHS.Board(userID)} className={'create-link'}>Let's start to create</Link>
+                <Link to={PATHS.Board(userID)} className={'create-link'}>Let's start or continue to create</Link>
               </button>
             )}
           </div>

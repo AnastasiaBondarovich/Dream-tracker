@@ -14,7 +14,7 @@ const RootRouter = (props) => {
   const history = useHistory();
   const params = useParams();
   const userID = users.map(user => user.userID);
-  console.log ('location', history.location)
+  console.log ('location', history.location, users)
 
   return (
     <React.Fragment>

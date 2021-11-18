@@ -7,6 +7,8 @@ import Powerful from 'Assets/Images/ModalWindow/Powerful.png';
 import { logInUser } from 'api/apiUsers';
 import { PATHS } from '../../constants/paths';
 import { useHistory } from 'react-router';
+import { login } from '../../store/actions/users';
+import { useDispatch } from 'react-redux';
 
 const StyledSignInWindow = styled.div`
   background-color: #ffffff;
@@ -88,13 +90,15 @@ const StyledSignInWindow = styled.div`
 const SignInWindow = (props) => {
   const setModalContent = useContext(ModalContext);
   const history = useHistory();
+  const dispatch = useDispatch();
   const signIn = (userID) => {
     history.push(PATHS.Account(userID));
   };
 
   const signInUser = (email, password, userID) => {
     logInUser(email, password).then(({ data }) =>
-    {signIn(data), console.log('addUser2', data)}
+    {signIn(data), console.log('addUser3', data);
+    dispatch(login(email, password, data));}
     )};
 
   return (

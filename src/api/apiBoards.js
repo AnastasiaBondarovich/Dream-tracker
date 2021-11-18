@@ -29,3 +29,14 @@ export const chooseLayout = (layout) => {
     resolve({data: layoutOfBoard})
   })
 }
+
+export const choosePicture = (picture) => {
+  return new Promise((resolve, reject) => {
+    let picturesForBoard = JSON.parse(window.localStorage.getItem('picturesForBoard'));
+    if (!picturesForBoard) picturesForBoard = [];
+    picturesForBoard.push(picture);
+    window.localStorage.setItem('picturesForBoard', JSON.stringify(picturesForBoard));
+    console.log('picturesForBoard', picturesForBoard)
+    resolve({data: picturesForBoard})
+  })
+}
