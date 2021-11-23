@@ -6,13 +6,16 @@ import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
 import rootReducer from './reducers/rootReducer';
 import usersReducer from './reducers/usersReducer';
 import goalsReducer from './reducers/goalsReducer';
+import wishBoardReducer from './reducers/goalsReducer';
 
 const newUser = [];
-let newGoalsList = [{ taskName: 'Travel to 50 countries'}];
+const newGoalsList = [{ taskName: 'Travel to 50 countries'}];
+const newWishBoard = [];
 
 const initialState = { 
   usersReducer: { users: newUser }, 
-  goalsReducer: { goals: newGoalsList } 
+  goalsReducer: { goals: newGoalsList },
+  wishBoardReducer: { wishBoard: newWishBoard }  
 };
 
 const persistConfig = {
