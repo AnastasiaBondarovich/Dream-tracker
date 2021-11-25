@@ -30,7 +30,7 @@ const StyledChooseCategoryModal = styled.div`
     font-weight: 600;
     font-size: 20px;
     color: #3a436f;
-    margin-bottom: 40px;
+    margin-bottom: 5px;
   }
 
   .popup-close {
@@ -108,6 +108,22 @@ const StyledChooseCategoryModal = styled.div`
     color: #ffffff;
     margin: 10px 0 50px;
   }
+
+  .title-categories {
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  span {
+    margin: 0 auto;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    color: #3a436f;
+    margin-bottom: 5px;
+  }
 `;
 
 const ChooseCategoryModal = () => {
@@ -127,7 +143,11 @@ const ChooseCategoryModal = () => {
 
       <h3>My Wish board</h3>
 
-      <h5>Choose сategories of wishes for your board</h5>
+      <div className={'title-categories'}>
+         <h5>Choose сategories of wishes for your board</h5>
+
+      <span>*You must select an even number of categories</span>
+      </div>
 
       <div className={'buttons-categories'}>
         <Formik

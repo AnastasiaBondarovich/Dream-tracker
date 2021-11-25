@@ -11,8 +11,7 @@ import { ModalContext } from 'HOC/GlobalModalProvider';
 import ChooseColorModal from './Components/ChooseColorModal';
 import ChooseCategoryModal from './Components/CooseCategoryModal';
 import ChooseLayoutModal from './Components/ChooseLayoutModal';
-import LibraryModal from './Components/LibraryModal';
-
+import LibraryModal from './Components/LibraryModal/LibraryModal';
 
 
 const StyledWishBoardScene = styled.div`

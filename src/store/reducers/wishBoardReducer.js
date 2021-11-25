@@ -79,6 +79,11 @@ const wishBoardReducer = (state, action) => {
       //   console.log('new wish', newWishBoard);
         return { ...state, wishBoard: newWishBoard};
 
+        case WISHBOARD_ACTIONS.remove:
+      newWishBoard = [...state.wishBoard];
+      newWishBoard.splice(action.payload, 1);
+      return { ...state, wishBoard: newWishBoard};
+
     default: return {...state}
     
 }

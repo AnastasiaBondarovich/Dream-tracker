@@ -1,15 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { ModalContext } from 'HOC/GlobalModalProvider';
-import LibraryModal from './LibraryModal';
 import { choosePicture } from '../../../api/apiBoards';
+import LibraryModal from './LibraryModal/LibraryModal';
 
 const StyledChoosePicturesModal = styled.div`
-  /* display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center; */
   max-height: 90%;
   max-width: 80%;
   background-color: #fff;
@@ -98,7 +93,8 @@ const ChoosePicturesModal = (props) => {
   });
 
   const pictureForBoard = () =>{
-    let images = document.getElementsByTagName("img");
+    let allImg = document.querySelector('.result');
+    let images = allImg.getElementsByTagName('img');
   
     for (let i = 0; i < images.length; i++) {
       images[i].addEventListener("click", function(event) {

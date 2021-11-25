@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux';
 import { usersSelector } from '../../store/selectors/users';
 import { Link } from 'react-router-dom';
 import { PATHS } from '../../constants/paths';
+import { wishBoardSelector } from '../../store/selectors/wishBoard';
+import FinishedBoard from './Components/FinishedBoard';
 
 const StyledMainScene = styled.div`
   .card-row-wrapper {
@@ -81,10 +83,12 @@ const MainScene = () => {
   const users = useSelector(usersSelector);
   const userID = users.map(user => user.userID);
   console.log(users);
+  const wishList = useSelector(wishBoardSelector);
 
   return (
     <StyledMainScene>
-      <div className={'content-row'}>
+      {wishList.length === 0 && (
+<div className={'content-row'}>
         <div className={'title-item'}>
           <h3>Visualization is an exercise for the brain</h3>
           <div className={'title-item_description'}>
@@ -116,6 +120,9 @@ const MainScene = () => {
           <FormMainScene />
         )} 
       </div>
+      )}
+       {wishList.length != 0 && (
+      <FinishedBoard/>)}
     </StyledMainScene>
   );
 };

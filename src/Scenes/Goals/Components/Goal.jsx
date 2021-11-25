@@ -29,16 +29,9 @@ const StyledGoal = styled.div`
     font-size: 18px;
   }
 
-  .goal-item_buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    flex-wrap: wrap;
-  }
-
   .goal-item_icons {
     position: relative;
-    left: 25%;
+    left: 0;
     top: 0;
     display: flex;
     flex-direction: row;
@@ -53,7 +46,7 @@ const StyledGoal = styled.div`
     transition-duration: 0.3s;
     cursor: pointer;
     text-decoration: none;
-    margin: 0 50px 4px;
+    margin: 0 15px 4px;
   }
   
   .goal-edit i:hover {
@@ -67,6 +60,18 @@ const StyledGoal = styled.div`
     background: #ffffff;
     border: 1px solid #0023c4;
     border-radius: 50px;
+  }
+
+  .button-delete {
+    height: 30px;
+    width: 150px;
+    background: #bf7de2;
+    border-radius: 25px;
+    border: 1px solid #0023c4;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    color: #ffffff;
   }
 `
 
@@ -87,20 +92,16 @@ const Goal = (props) => {
           </div>
         </div>
         <div className="goal-item_icons">
-          <input className="goal-checkbox" type="checkbox" onChange={() => {dispatch(removeGoal(props.index))}}/>
           <button onClick={() => {setModalContent(
             <ChangeGoalModal taskName={props.taskName} index={props.index}/>
           )}} 
           type="button" className={"goal-edit"}>
           <i class="fas fa-pencil-alt"></i>
-          {console.log('Goal', props.taskName)}
         </button>
-        </div>
-        <div className="goal-item_buttons">
-          {/* {props.state !== TASK_STATUS.done &&
-          <button className="button-done" onClick={() => {dispatch(moveToDone(props.isDone, props.index, props.state))}}>✔ Task is done</button>}
-          <button className="button-delete" onClick={() => {dispatch(removeCard(props.index))}}>× Delete task</button> */}
-          {props.children}
+          <button className="button-delete" type="button" onClick={() => {dispatch(removeGoal(props.index))}}>
+            {/* <input className="goal-checkbox" type="checkbox" name="checked" onChange={() => {}}/> */}
+            ✔ Send goals to archive
+          </button>
         </div>
       </StyledGoal>
     )
