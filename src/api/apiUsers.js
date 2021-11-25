@@ -19,7 +19,7 @@ export const logInUser = (email, password) => {
     if (!usersList) reject('Error');
     const userData = usersList.find(user => user.email === email && user.password === password);
     const userID = userData.userID;
-    console.log ('log2', userID)
+    console.log ('log3', userID)
     if (userData) {
       resolve({data: userID})
     } else {

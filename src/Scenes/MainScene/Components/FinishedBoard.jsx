@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { usersSelector } from '../../../store/selectors/users';
-import { PATHS } from '../../../constants/paths';
 import { wishBoardSelector } from '../../../store/selectors/wishBoard';
 import { Link } from 'react-router-dom';
 import { removeWishBoard } from '../../../store/actions/whishBoard';
+import { PATHS, ROUTE } from '../../../Routing/routing';
 
 const StyledFinishedBoard = styled.div`
   display: flex;
@@ -55,6 +55,7 @@ const StyledFinishedBoard = styled.div`
     font-weight: 400;
     font-size: 12px;
     color: #ffffff;
+    margin-top: 30px;
   }
 
   img {
@@ -77,12 +78,13 @@ const FinishedBoard = () => {
   const addTable = () => {
     wishList.map((table) => {
       console.log('finishBoard', table.table);
-      document.querySelector('.result').appendChild(table.table);
+      if (table.table != {}) {
+        document.querySelector('.result').appendChild(table.table);
       let tableButtons = document.querySelector('table');
       tableButtons
         .querySelectorAll('button')
         .forEach((e) => e.parentNode.removeChild(e));
-    });
+      }});
   };
 
   return (
@@ -94,8 +96,8 @@ const FinishedBoard = () => {
           className={'button-clear'}
           onClick={() => {
             console.log('clear'),
-              window.localStorage.clear(),
-              dispatch(removeWishBoard(0));
+            window.localStorage.clear();
+            dispatch(removeWishBoard(0));
           }}
         >
           Create new wish board

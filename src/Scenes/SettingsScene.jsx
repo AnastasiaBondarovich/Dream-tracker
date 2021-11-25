@@ -7,6 +7,7 @@ import { useHistory } from 'react-router';
 import { removeUser } from '../store/actions/users';
 import People from '../assets/images/SettingsScene/People.png';
 import exit from '../assets/images/SettingsScene/exit.png';
+import { removeWishBoard } from '../store/actions/whishBoard';
 
 const StyleSettingsScene = styled.div`
   display: flex;
@@ -64,6 +65,7 @@ const SettingsScene = () => {
   const deleteUser = (userIndex) => {
     dispatch(removeUser(userIndex));
     history.push('/');
+    dispatch(removeWishBoard(0))
   };
 
   return (

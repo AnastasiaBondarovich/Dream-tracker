@@ -5,7 +5,7 @@ import { Form, Formik } from 'formik';
 import FormikInput from '../FormikInputs/FormikInput';
 import Powerful from 'Assets/Images/ModalWindow/Powerful.png';
 import { logInUser } from 'api/apiUsers';
-import { PATHS } from '../../constants/paths';
+import { PATHS } from '../../Routing/routing';
 import { useHistory } from 'react-router';
 import { login } from '../../store/actions/users';
 import { useDispatch } from 'react-redux';
@@ -96,10 +96,11 @@ const SignInWindow = (props) => {
   };
 
   const signInUser = (email, password, userID) => {
-    logInUser(email, password).then(({ data }) =>
-    {signIn(data), console.log('addUser3', data);
-    dispatch(login(email, password, data));}
-    )};
+    logInUser(email, password).then(({ data }) => {
+      dispatch(login(email, password, data));
+      signIn(data), console.log('addUser3', data);
+    });
+  };
 
   return (
     <StyledSignInWindow>

@@ -7,7 +7,7 @@ import InspirationScene from 'Scenes/Inspiration/InspirationScene';
 import SettingsScene from 'Scenes/SettingsScene';
 import { useSelector } from 'react-redux';
 import { usersSelector } from '../store/selectors/users';
-import { PATHS } from '../constants/paths';
+import { ROUTE } from './routing';
 
 const RootRouter = (props) => {
   const users = useSelector(usersSelector);
@@ -18,22 +18,19 @@ const RootRouter = (props) => {
 
   return (
     <React.Fragment>
-        <Route exact path={PATHS.Account(userID)}>
+        <Route exact path={ROUTE.Account}>
           <MainScene />
       </Route>
-      {/* <Route path={`${PATHS.Board(userID)}/colors`}>
-        <ChooseColor />
-      </Route> */}
-      <Route path={PATHS.Board(userID)}>
+      <Route path={ROUTE.Board}>
         <WishBoardScene />
       </Route>
-      <Route path={PATHS.Goals(userID)}>
+      <Route path={ROUTE.Goals}>
         <GoalsScene />
       </Route>
-      <Route path={PATHS.Inspiration(userID)}>
+      <Route path={ROUTE.Inspiration}>
         <InspirationScene />
       </Route>
-      <Route path={PATHS.Settings(userID)}>
+      <Route path={ROUTE.Settings}>
         <SettingsScene />
       </Route>
     </React.Fragment>

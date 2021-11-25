@@ -4,12 +4,7 @@ import { ModalContext } from 'HOC/GlobalModalProvider';
 import { Form, Formik } from 'formik';
 import FormikInput from '../../FormikInputs/FormikInput';
 import welcoming from 'Assets/Images/ModalWindow/welcoming.png';
-import { Link } from 'react-router-dom';
-import { useHistory } from 'react-router';
 import { userValidate } from './userValidate';
-import { PATHS } from 'constants/paths';
-import { usersSelector } from 'store/selectors/users';
-import { useSelector } from 'react-redux';
 
 const StyledRegistrationWindow = styled.div`
   background-color: #ffffff;

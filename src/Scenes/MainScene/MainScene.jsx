@@ -4,9 +4,9 @@ import FormMainScene from './Components/FormMainScene';
 import { useSelector } from 'react-redux';
 import { usersSelector } from '../../store/selectors/users';
 import { Link } from 'react-router-dom';
-import { PATHS } from '../../constants/paths';
 import { wishBoardSelector } from '../../store/selectors/wishBoard';
 import FinishedBoard from './Components/FinishedBoard';
+import { PATHS, ROUTE } from '../../Routing/routing';
 
 const StyledMainScene = styled.div`
   .card-row-wrapper {

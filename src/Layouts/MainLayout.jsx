@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useHistory, useLocation, useParams } from 'react-router';
 import hero_bg from 'Assets/Images/MainScene/hero_bg.jpg';
 import DreamLogo from 'Assets/Images/MainScene/DreamLogo.png';
 import { useSelector } from 'react-redux';
 import { usersSelector } from '../store/selectors/users';
-import { PATHS } from 'constants/paths';
+import { PATHS, ROUTE } from '../Routing/routing';
 
 const StyledMainLayout = styled.div`
   min-height: 100vh;
@@ -110,9 +111,13 @@ const StyledMainLayout = styled.div`
 const MainLayout = (props) => {
   const users = useSelector(usersSelector);
   const userList = JSON.parse(localStorage.registeredUsersList);
+  // const urlParams = useParams();
+  // const urlParamsId = urlParams.userID;
+  // console.log('urlParamsId', urlParamsId);
   const userID = users.map(user => user.userID);
+  // let id = useLocation().pathname.substring(23);
   const userData = userList.find(user => user.userID == userID);  
-  console.log('userlist', userData)
+  
 
   return (
     <StyledMainLayout>

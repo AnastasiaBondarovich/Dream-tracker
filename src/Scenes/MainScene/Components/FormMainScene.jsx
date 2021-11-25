@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { usersSelector } from '../../../store/selectors/users';
 import { newUser } from '../../../store/actions/users';
 import { registerUser } from '../../../api/apiUsers';
-import { PATHS } from '../../../constants/paths';
+import { PATHS } from '../../../Routing/routing';
 
 const StyledFormMainScene = styled.div`
   display: flex;
