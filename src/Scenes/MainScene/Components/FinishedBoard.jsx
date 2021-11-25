@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { usersSelector } from '../../../store/selectors/users';
@@ -6,6 +6,8 @@ import { wishBoardSelector } from '../../../store/selectors/wishBoard';
 import { Link } from 'react-router-dom';
 import { removeWishBoard } from '../../../store/actions/whishBoard';
 import { PATHS, ROUTE } from '../../../Routing/routing';
+import * as htmlToImage from 'html-to-image';
+import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 
 const StyledFinishedBoard = styled.div`
   display: flex;
@@ -45,7 +47,14 @@ const StyledFinishedBoard = styled.div`
     color: #3a436f;
   }
 
-  .button-clear {
+  .wishboard-buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  .button-clear, .button-save {
     height: 30px;
     width: 150px;
     background: #bf7de2;
@@ -56,6 +65,7 @@ const StyledFinishedBoard = styled.div`
     font-size: 12px;
     color: #ffffff;
     margin-top: 30px;
+    margin-right: 40px;
   }
 
   img {
@@ -75,6 +85,32 @@ const FinishedBoard = () => {
     addTable();
   }, []);
 
+  const ref = useRef<HTMLDivElement>(null);
+  const onButtonClick = useCallback(() => {
+    if (ref.current === null) {
+      return
+    }
+
+    htmlToImage.toJpeg(document.querySelector('table'), { quality: 0.95 })
+  .then(function (dataUrl) {
+    var link = document.createElement('a');
+    link.download = 'my-wish-board.jpeg';
+    link.href = dataUrl;
+    link.click();
+  });
+
+    // toJpeg(ref.current, { cacheBust: true, })
+    //   .then((dataUrl) => {
+    //     const link = document.createElement('a')
+    //     link.download = 'my-wish-board.jpeg'
+    //     link.href = dataUrl
+    //     link.click()
+    //   })
+    //   .catch((err) => {
+    //     console.log(err)
+    //   })
+  }, [ref])
+
   const addTable = () => {
     wishList.map((table) => {
       console.log('finishBoard', table.table);
@@ -91,18 +127,30 @@ const FinishedBoard = () => {
     <StyledFinishedBoard>
       <h3 className={'wishboard_title'}>Your wish board</h3>
       <div className={'result'}></div>
+      <div className={'wishboard-buttons'}>
+        <button
+          className={'button-save'}
+          onClick={
+            onButtonClick
+          }
+        >
+          Save wish board
+        </button>
       <Link to={PATHS.Board(userID)}>
         <button
           className={'button-clear'}
           onClick={() => {
             console.log('clear'),
-            window.localStorage.clear();
+            // window.localStorage.clear();
+            localStorage.removeItem('chooseCategory');
             dispatch(removeWishBoard(0));
           }}
         >
           Create new wish board
         </button>
       </Link>
+      </div>
+      
     </StyledFinishedBoard>
   );
 };
