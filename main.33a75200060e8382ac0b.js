@@ -61519,7 +61519,7 @@ function toString(value) {
 /******/ 	
 /******/ 	/* webpack/runtime/publicPath */
 /******/ 	(() => {
-/******/ 		__webpack_require__.p = "/dream-tracker";
+/******/ 		__webpack_require__.p = "/Dream-tracker";
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/react refresh */
@@ -61594,4 +61594,4 @@ function toString(value) {
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=main.88b1f448f1c7058f2656.js.map
+//# sourceMappingURL=main.33a75200060e8382ac0b.js.map
