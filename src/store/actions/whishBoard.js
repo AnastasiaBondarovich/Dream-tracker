@@ -1,6 +1,6 @@
 import { WISHBOARD_ACTIONS } from "../actoinTypes";
 
-export const newWishBoard = (table, td, category) => {return ({type: WISHBOARD_ACTIONS.add,
+export const newWishBoard = (table) => {return ({type: WISHBOARD_ACTIONS.add,
   payload: {
       table: table,
       // td: td,

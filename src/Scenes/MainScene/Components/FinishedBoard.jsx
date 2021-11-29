@@ -16,7 +16,7 @@ const StyledFinishedBoard = styled.div`
   align-items: center;
   max-height: 80%;
   width: 90%;
-  padding: 5% 5%;
+  padding: 3% 5%;
   margin: 1% 5%;
   background-color: #ffff;
   border: 2px solid #666666;
@@ -33,9 +33,14 @@ const StyledFinishedBoard = styled.div`
     margin-bottom: 40px;
   }
 
+  .result {
+    background-color: #ffff;
+  }
+
   table {
     border: 30px solid rgba(191, 125, 226, 0.2);
     border-radius: 10px;
+    background-color: #ffff;
   }
 
   td {
@@ -54,7 +59,8 @@ const StyledFinishedBoard = styled.div`
     justify-content: space-around;
   }
 
-  .button-clear, .button-save {
+  .button-clear,
+  .button-save {
     height: 30px;
     width: 150px;
     background: #bf7de2;
@@ -66,6 +72,12 @@ const StyledFinishedBoard = styled.div`
     color: #ffffff;
     margin-top: 30px;
     margin-right: 40px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+
+    &:hover {
+      transform: scale(1.2);
+    }
   }
 
   img {
@@ -85,19 +97,20 @@ const FinishedBoard = () => {
     addTable();
   }, []);
 
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef < HTMLDivElement > null;
   const onButtonClick = useCallback(() => {
     if (ref.current === null) {
-      return
+      return;
     }
 
-    htmlToImage.toJpeg(document.querySelector('table'), { quality: 0.95 })
-  .then(function (dataUrl) {
-    var link = document.createElement('a');
-    link.download = 'my-wish-board.jpeg';
-    link.href = dataUrl;
-    link.click();
-  });
+    htmlToImage
+      .toJpeg(document.querySelector('.result'), { quality: 0.95 })
+      .then(function (dataUrl) {
+        var link = document.createElement('a');
+        link.download = 'my-wish-board.jpeg';
+        link.href = dataUrl;
+        link.click();
+      });
 
     // toJpeg(ref.current, { cacheBust: true, })
     //   .then((dataUrl) => {
@@ -109,18 +122,29 @@ const FinishedBoard = () => {
     //   .catch((err) => {
     //     console.log(err)
     //   })
-  }, [ref])
+  }, [ref]);
 
   const addTable = () => {
     wishList.map((table) => {
       console.log('finishBoard', table.table);
-      if (table.table != {}) {
+      if (table.table === undefined) {
+        document.querySelector('.button-save').remove();
+      } else {
         document.querySelector('.result').appendChild(table.table);
-      let tableButtons = document.querySelector('table');
-      tableButtons
-        .querySelectorAll('button')
-        .forEach((e) => e.parentNode.removeChild(e));
-      }});
+        let tableButtons = document.querySelector('table');
+        tableButtons
+          .querySelectorAll('button')
+          .forEach((e) => e.parentNode.removeChild(e));
+      }
+
+      // if (table.table != undefined || {} || null) {
+      //   document.querySelector('.result').appendChild(table.table);
+      // let tableButtons = document.querySelector('table');
+      // tableButtons
+      //   .querySelectorAll('button')
+      //   .forEach((e) => e.parentNode.removeChild(e));
+      // }
+    });
   };
 
   return (
@@ -128,29 +152,21 @@ const FinishedBoard = () => {
       <h3 className={'wishboard_title'}>Your wish board</h3>
       <div className={'result'}></div>
       <div className={'wishboard-buttons'}>
-        <button
-          className={'button-save'}
-          onClick={
-            onButtonClick
-          }
-        >
+        <button className={'button-save'} onClick={onButtonClick}>
           Save wish board
         </button>
-      <Link to={PATHS.Board(userID)}>
-        <button
-          className={'button-clear'}
-          onClick={() => {
-            console.log('clear'),
-            // window.localStorage.clear();
-            localStorage.removeItem('chooseCategory');
-            dispatch(removeWishBoard(0));
-          }}
-        >
-          Create new wish board
-        </button>
-      </Link>
+        <Link to={PATHS.Board(userID)}>
+          <button
+            className={'button-clear'}
+            onClick={() => {
+              localStorage.removeItem('categoriesBoard');
+              dispatch(removeWishBoard(0));
+            }}
+          >
+            Create new wish board
+          </button>
+        </Link>
       </div>
-      
     </StyledFinishedBoard>
   );
 };

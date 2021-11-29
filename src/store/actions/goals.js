@@ -20,6 +20,11 @@ export const changeGoal = (changeTaskName, index) => {
   };
 };
 
-export const removeGoal = (index) => {
-  return { type: GOALS_ACTIONS.remove, payload: index };
+export const transferGoal = (taskName, index) => {
+  return { type: GOALS_ACTIONS.transfer, 
+    payload: {
+      taskName: taskName,
+      index: index,
+    },
+  };
 };

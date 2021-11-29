@@ -7,7 +7,7 @@ export const USERS_ACTIONS = {
 export const GOALS_ACTIONS = {
   add: 'add_new_goal',
   change: 'change_goal',
-  remove: 'remove_goal'
+  transfer: 'transfer_goal_to_archive'
 };
 
 export const WISHBOARD_ACTIONS = {

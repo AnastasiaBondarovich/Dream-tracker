@@ -41,13 +41,13 @@ export const choosePicture = (picture) => {
   })
 }
 
-export const tableOfWishes = (table) => {
-  return new Promise((resolve, reject) => {
-    let tableOfBoard = JSON.parse(window.localStorage.getItem('tableOfBoard'));
-    if (!tableOfBoard) tableOfBoard = {};
-    tableOfBoard.table = table;
-    window.localStorage.setItem('tableOfBoard', JSON.stringify(tableOfBoard));
-    console.log('tableOfBoard', tableOfBoard)
-    resolve({data: tableOfBoard.table})
-  })
-}
+// export const tableOfWishes = (table) => {
+//   return new Promise((resolve, reject) => {
+//     let tableOfBoard = JSON.parse(window.localStorage.getItem('tableOfBoard'));
+//     if (!tableOfBoard) tableOfBoard = {};
+//     tableOfBoard.table = table;
+//     window.localStorage.setItem('tableOfBoard', JSON.stringify(tableOfBoard));
+//     console.log('tableOfBoard', tableOfBoard)
+//     resolve({data: tableOfBoard.table})
+//   })
+// }

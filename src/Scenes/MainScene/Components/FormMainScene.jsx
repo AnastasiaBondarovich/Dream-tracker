@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router';
-import build_your__home from 'Assets/Images/MainScene/build_your__home.png';
-import DreamLogo from 'Assets/Images/MainScene/DreamLogo.png';
+import build_your__home from '../../../assets/images/MainScene/build_your__home.png';
+import DreamLogo from '../../../assets/images/MainScene/DreamLogo.png';
 import { ModalContext } from 'HOC/GlobalModalProvider';
 import RegistrationWindow from '../../../Components/ModalContent/RegistrationWindow/RegistrationWindow';
 import SignInWindow from 'Components/ModalContent/SignInWindow';

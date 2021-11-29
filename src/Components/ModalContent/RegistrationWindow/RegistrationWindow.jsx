@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { ModalContext } from 'HOC/GlobalModalProvider';
 import { Form, Formik } from 'formik';
 import FormikInput from '../../FormikInputs/FormikInput';
-import welcoming from 'Assets/Images/ModalWindow/welcoming.png';
+import welcoming from '../../../assets/images/ModalWindow/welcoming.png';
 import { userValidate } from './userValidate';
 
 const StyledRegistrationWindow = styled.div`

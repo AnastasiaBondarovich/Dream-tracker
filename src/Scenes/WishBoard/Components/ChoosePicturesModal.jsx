@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { ModalContext } from 'HOC/GlobalModalProvider';
 import { choosePicture } from '../../../api/apiBoards';
-import LibraryModal from './LibraryModal/LibraryModal';
+import LibraryModal from './LibraryModal';
 
 const StyledChoosePicturesModal = styled.div`
   max-height: 90%;
@@ -122,12 +122,11 @@ const ChoosePicturesModal = (props) => {
 
         <h5>Choose picture for your board</h5>
 
-        <div className={"result"}></div>
+        <div className={"result"}>
+          {/* {<Skeleton/> || pictureForBoard()} */}
+        </div>
 
         <button onClick={() => {
-          // choosePicture(img).then(({ data }) => {
-          //     console.log('addPicture', data);
-          //   }); setModalContent(<LibraryModal img={img} category={props.category}/>), console.log('category!!!', props.category)}}
           setModalContent(<LibraryModal img={img} category={props.category}/>), console.log('category!!!', props.category)}} 
           type="button" className={'button-save'}> Save </button>
       </div>

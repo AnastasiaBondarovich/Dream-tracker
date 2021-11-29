@@ -10,11 +10,12 @@ import wishBoardReducer from './reducers/goalsReducer';
 
 const newUser = [];
 const newGoalsList = [{ taskName: 'Travel to 50 countries'}];
+const archiveGoalsList = [];
 const newWishBoard = [];
 
 const initialState = { 
   usersReducer: { users: newUser }, 
-  goalsReducer: { goals: newGoalsList },
+  goalsReducer: { goals: newGoalsList, archiveGoals: archiveGoalsList },
   wishBoardReducer: { wishBoard: newWishBoard }  
 };
 

@@ -3,7 +3,7 @@ import { ModalContext } from 'HOC/GlobalModalProvider';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import ChangeGoalModal from './ChangeGoalModal';
-import { removeGoal } from 'store/actions/goals';
+import { transferGoal } from 'store/actions/goals';
 
 
 const StyledGoal = styled.div`
@@ -98,7 +98,7 @@ const Goal = (props) => {
           type="button" className={"goal-edit"}>
           <i class="fas fa-pencil-alt"></i>
         </button>
-          <button className="button-delete" type="button" onClick={() => {dispatch(removeGoal(props.index))}}>
+          <button className="button-delete" type="button" onClick={() => {dispatch(transferGoal(props.taskName, props.index))}}>
             {/* <input className="goal-checkbox" type="checkbox" name="checked" onChange={() => {}}/> */}
             ✔ Send goals to archive
           </button>

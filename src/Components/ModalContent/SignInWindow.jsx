@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { ModalContext } from 'HOC/GlobalModalProvider';
 import { Form, Formik } from 'formik';
 import FormikInput from '../FormikInputs/FormikInput';
-import Powerful from 'Assets/Images/ModalWindow/Powerful.png';
+import Powerful from '../../assets/images/ModalWindow/Powerful.png';
 import { logInUser } from 'api/apiUsers';
 import { PATHS } from '../../Routing/routing';
 import { useHistory } from 'react-router';

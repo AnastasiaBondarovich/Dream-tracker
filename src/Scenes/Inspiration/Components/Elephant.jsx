@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { ModalContext } from 'HOC/GlobalModalProvider';
-import Elephant_Rope from 'assets/images/InspirationScene/Elephant_Rope.png';
+import Elephant_Rope from '../../../assets/images/InspirationScene/Elephant_Rope.png';
 
 const StyleElephant = styled.div`
   max-height: 100%;
@@ -64,10 +64,15 @@ const StyleElephant = styled.div`
 
   span {
     font-family: 'Roboto', sans-serif;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 500;
     color: #3a436f;
     margin: 30px 50px;
+  }
+
+  img  {
+    width: 112px;
+    height: 100px;
   }
 `;
 

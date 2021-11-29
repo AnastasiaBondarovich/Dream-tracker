@@ -6,6 +6,7 @@ module.exports = {
   mode: 'development',
   entry: './src/index.js',
   output: {
+    // publicPath: '/Dream-tracker/',
     publicPath: '/',
     path: path.resolve(__dirname, 'build'),
     filename: '[name].[contenthash].js',

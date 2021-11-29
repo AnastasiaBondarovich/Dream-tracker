@@ -15,6 +15,28 @@ const wishBoardReducer = (state, action) => {
       // );
       //   }
 
+
+      //     let index = newWishBoard.findIndex(item => item.category === action.payload.category, console.log('td.category', action.payload.category));
+      //   console.log('index', index)
+      //   if (index === -1) {
+      //     newWishBoard.push(
+      //                   {
+      //                       table: action.payload.table,
+      //                       // td: action.payload.td,
+      //                       category: action.payload.category,
+      //                   }
+      //               );
+      //         } else {
+      //         newWishBoard[index] = {
+      //           table: action.payload.table,
+      //           category: action.payload.category,
+      //       };
+      // }
+
+
+
+
+
       if (newWishBoard === []) {
         newWishBoard.push({
           table: action.payload.table,
@@ -28,6 +50,9 @@ const wishBoardReducer = (state, action) => {
         };
         // }
       }
+
+
+
 
       // let index = newWishBoard.findIndex(td => td.category === action.payload.category);
       //   console.log('index', index);

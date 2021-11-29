@@ -6,7 +6,7 @@ import Goal from './Components/Goal';
 import { ModalContext } from 'HOC/GlobalModalProvider';
 import { newGoalsList } from 'store/actions/goals';
 import { removeGoal } from 'store/actions/goals';
-
+import ArchiveGoals from './Components/ArchiveGoals';
 
 const StyleGoalsScene = styled.div`
   display: flex;
@@ -43,11 +43,17 @@ const StyleGoalsScene = styled.div`
     border-radius: 4px;
   }
 
-  .goals-row_title {
+  .goals-row_header {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     margin-top: 20px;
+  }
+
+  .goals-row_title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
 
   .goals-title {
@@ -56,6 +62,27 @@ const StyleGoalsScene = styled.div`
     font-weight: 600;
     font-size: 24px;
     color: #3a436f;
+    margin-right: 30px;
+    border-bottom: 2px solid rgba(191, 125, 226, 0.5);
+  }
+
+  .goals-title_button {
+    margin: 0 auto;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    color: #3a436f;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    transition-duration: 0.4s;
+
+    &:hover {
+      border-bottom: 2px solid rgba(191, 125, 226, 0.5);
+      font-weight: 500;
+      font-size: 20px;
+      transform: scale(1.05);
+    }
   }
 
   .goals-search {
@@ -127,18 +154,29 @@ const GoalsScene = (props) => {
   };
 
   const filterListGoals = (tasksToFilter) => {
-    return tasksToFilter.filter(task => {
-        return (task.taskName.toLowerCase().includes(searchGoal.toLowerCase()));
-    })
-}
+    return tasksToFilter.filter((task) => {
+      return task.taskName.toLowerCase().includes(searchGoal.toLowerCase());
+    });
+  };
 
   return (
     <StyleGoalsScene>
       <div className={'goals-wrapper'}>
         <h3>My Goals</h3>
         <ul className={'goals-row'}>
-          <div className={'goals-row_title'}>
-            <p className={'goals-title'}>Active goals</p>
+          <div className={'goals-row_header'}>
+            <div className={'goals-row_title'}>
+              <p className={'goals-title'}>Active goals</p>
+              <button
+                className={'goals-title_button'}
+                onClick={() => {
+                  setModalContent(<ArchiveGoals />);
+                }}
+              >
+                Archive goals
+              </button>
+            </div>
+
             {/* <i class="fas fa-search" /> */}
             <input
               className={'goals-search'}
@@ -146,15 +184,11 @@ const GoalsScene = (props) => {
               placeholder={'Start typing a goal to search'}
               onChange={(event) => {
                 setSearchGoal(event.target.value);
-            }}
+              }}
             />
-            {/* <button
-              className={'goals-search_submit'}
-              type="submit">Search</button> */}
           </div>
           <li className={'goals-item'}>
-          {filterListGoals(goalsList).map((task, index) => {
-            // {goalsList.map((task, index) => {
+            {filterListGoals(goalsList).map((task, index) => {
               return (
                 <div key={task.taskName}>
                   <Goal taskName={task.taskName} index={index} />
@@ -162,10 +196,6 @@ const GoalsScene = (props) => {
               );
             })}
           </li>
-          {/* <button onClick={() => {setModalContent(<NewGoalModal addGoal={addGoal}/>)}}>Add New Goal</button> */}
-          {/* <button className={"button-remove"} type="button" onClick={() => {console.log('check',props.checked)}}>
-            ✔ Send goals to archive
-          </button> */}
           <div className={'newgoal-item'}>
             <input
               className={'newgoal-item_input'}

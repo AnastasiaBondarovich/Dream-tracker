@@ -1,17 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import color_picker from 'Assets/Images/WishBoardScene/color_picker.png';
-import zoom from 'Assets/Images/WishBoardScene/zoom.png';
-import layers from 'Assets/Images/WishBoardScene/layers.png';
-import library from 'Assets/Images/WishBoardScene/library.png';
+import color_picker from '../../assets/images/WishBoardScene/color_picker.png';
+import zoom from '../../assets/images/WishBoardScene/zoom.png';
+import layers from '../../assets/images/WishBoardScene/layers.png';
+import library from '../../assets/images/WishBoardScene/library.png';
 import { useSelector } from 'react-redux';
 import { usersSelector } from '../../store/selectors/users';
 import { ModalContext } from 'HOC/GlobalModalProvider';
 import ChooseColorModal from './Components/ChooseColorModal';
 import ChooseCategoryModal from './Components/CooseCategoryModal';
 import ChooseLayoutModal from './Components/ChooseLayoutModal';
-import LibraryModal from './Components/LibraryModal/LibraryModal';
+import LibraryModal from './Components/LibraryModal';
 
 
 const StyledWishBoardScene = styled.div`
@@ -44,7 +44,17 @@ const StyledWishBoardScene = styled.div`
     border-color: #ffff;
     background-color: #ffff;
     cursor: pointer;
+    border-radius: 30px;
   }
+
+  .clicked {
+background-color: rgba(191, 125, 226, 0.3);
+}
+
+  /* button:active {
+  background: #0077ff;
+  transition: background 10s;
+}  */
 
   img {
     margin: 20px auto 20px;
@@ -56,29 +66,39 @@ const WishBoardScene = () => {
   const users = useSelector(usersSelector);
   const userID = users.map((user) => user.userID);
 
+  const changeColour = (e) => {
+      e.parentNode.classList.add('clicked');
+};
+
   return (
     <StyledWishBoardScene>
       <h3>My Wish board</h3>
       <div className={'wish-wrapper'}>
         <button className={'button-color'}
-          onClick={() => {
-            setModalContent(<ChooseColorModal />);
+          onClick={(e) => {
+            console.log('event', e.target)
+            setModalContent(<ChooseColorModal />), changeColour(e.target);
           }}>
           <img src={color_picker} alt={'Color'} />
           <p>Colors</p>
         </button>
 
         <button className={'button-category'}
-          onClick={() => {
-            setModalContent(<ChooseCategoryModal />);
+          onClick={(e) => {
+            if (localStorage.colorBoard === undefined || '') {
+              console.log('error')
+            } else {setModalContent(<ChooseCategoryModal />), changeColour(e.target)}
           }}>
           <img src={zoom} alt={'Categories'} />
           <p>Categories</p>
         </button>
 
         <button className={'button-layouts'}
-          onClick={() => {
-            setModalContent(<ChooseLayoutModal />);
+          onClick={(e) => {
+            if ((localStorage.colorBoard === undefined || '') || 
+            (localStorage.categoriesBoard === undefined)) {
+              console.log('error')
+            } else {setModalContent(<ChooseLayoutModal />), changeColour(e.target)}
           }}>
           <img src={layers} alt={'Layouts'} />
           <p>Layouts</p>
@@ -86,7 +106,11 @@ const WishBoardScene = () => {
 
         <button className={'button-library'}
           onClick={() => {
-            setModalContent(<LibraryModal />);
+            if ((localStorage.colorBoard === undefined || '') || 
+            (localStorage.categoriesBoard === undefined) || 
+            (localStorage.layoutOfBoard === undefined || '')) {
+              console.log('error')
+            } else {setModalContent(<LibraryModal />)}
           }}>
           <img src={library} alt={'library'} />
           <p>Library</p>

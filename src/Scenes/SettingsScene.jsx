@@ -17,9 +17,7 @@ const StyleSettingsScene = styled.div`
   height: 100%;
   background-color: #fff;
   border-radius: 25px;
-  position: relative;
-  left: 25%;
-  top: 25%;
+  margin: 1% auto;
 
   .remove-button {
     display: flex;

@@ -2,6 +2,7 @@ import { GOALS_ACTIONS } from '../actoinTypes';
 
 const goalsReducer = (state, action) => {
   let newGoalsList = [];
+  let archiveGoalsList = [];
   switch (action.type) {
     case GOALS_ACTIONS.add:
       newGoalsList = [...state.goals];
@@ -17,10 +18,17 @@ const goalsReducer = (state, action) => {
       newGoalsList[action.payload.index].taskName = action.payload.taskName;
       return { ...state, goals: newGoalsList };
 
-    case GOALS_ACTIONS.remove:
+    case GOALS_ACTIONS.transfer:
       newGoalsList = [...state.goals];
-      newGoalsList.splice(action.payload, 1);
-      return { ...state, goals: newGoalsList };
+      archiveGoalsList = [...state.archiveGoals];
+      newGoalsList.splice(action.payload.index, 1);
+      archiveGoalsList.push({
+        taskName: action.payload.taskName,
+        index: action.payload.index,
+      });
+      console.log('archiveGoalsList',  archiveGoalsList)
+      return { ...state, goals: newGoalsList, archiveGoals: archiveGoalsList};
+      
 
     default:
       return { ...state };

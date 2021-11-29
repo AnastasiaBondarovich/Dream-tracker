@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useHistory, useLocation, useParams } from 'react-router';
-import hero_bg from 'Assets/Images/MainScene/hero_bg.jpg';
-import DreamLogo from 'Assets/Images/MainScene/DreamLogo.png';
+import hero_bg from '../assets/images/MainScene/hero_bg.jpg';
+import DreamLogo from '../assets/images/MainScene/DreamLogo.png';
 import { useSelector } from 'react-redux';
 import { usersSelector } from '../store/selectors/users';
 import { PATHS, ROUTE } from '../Routing/routing';
@@ -117,6 +117,11 @@ const MainLayout = (props) => {
   const userID = users.map(user => user.userID);
   // let id = useLocation().pathname.substring(23);
   const userData = userList.find(user => user.userID == userID);  
+
+
+  // console.log('mainscene', id);
+  // const userData = users.find(user => user.userID === userID || id);  
+  // console.log('mainscene1', userData)
   
 
   return (
