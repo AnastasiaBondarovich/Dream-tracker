@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import color_picker from '../../assets/images/WishBoardScene/color_picker.png';
 import zoom from '../../assets/images/WishBoardScene/zoom.png';
@@ -50,11 +49,6 @@ const StyledWishBoardScene = styled.div`
   .clicked {
 background-color: rgba(191, 125, 226, 0.3);
 }
-
-  /* button:active {
-  background: #0077ff;
-  transition: background 10s;
-}  */
 
   img {
     margin: 20px auto 20px;

@@ -5,7 +5,6 @@ import { goalsSelector } from 'store/selectors/goals';
 import Goal from './Components/Goal';
 import { ModalContext } from 'HOC/GlobalModalProvider';
 import { newGoalsList } from 'store/actions/goals';
-import { removeGoal } from 'store/actions/goals';
 import ArchiveGoals from './Components/ArchiveGoals';
 
 const StyleGoalsScene = styled.div`
@@ -79,8 +78,8 @@ const StyleGoalsScene = styled.div`
 
     &:hover {
       border-bottom: 2px solid rgba(191, 125, 226, 0.5);
-      font-weight: 500;
-      font-size: 20px;
+      /* font-weight: 500;
+      font-size: 20px; */
       transform: scale(1.05);
     }
   }
@@ -190,8 +189,8 @@ const GoalsScene = (props) => {
           <li className={'goals-item'}>
             {filterListGoals(goalsList).map((task, index) => {
               return (
-                <div key={task.taskName}>
-                  <Goal taskName={task.taskName} index={index} />
+                <div key={index}>
+                  <Goal taskName={task.taskName} index={index} isButtons={true}/>
                 </div>
               );
             })}

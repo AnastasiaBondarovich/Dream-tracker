@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import ChangeGoalModal from './ChangeGoalModal';
 import { transferGoal } from 'store/actions/goals';
+import done from '../../../assets/images/GoalsScene/done.png';
 
 
 const StyledGoal = styled.div`
@@ -62,6 +63,11 @@ const StyledGoal = styled.div`
     border-radius: 50px;
   }
 
+  .goal-done {
+    height: 20px;
+    width: 20px;
+  }
+
   .button-delete {
     height: 30px;
     width: 150px;
@@ -77,7 +83,6 @@ const StyledGoal = styled.div`
 
 const Goal = (props) => {
   const setModalContent = useContext(ModalContext);
-
   const dispatch = useDispatch();
 
   if (!props.taskName) {
@@ -91,18 +96,19 @@ const Goal = (props) => {
             {`${props.taskName}`}
           </div>
         </div>
-        <div className="goal-item_icons">
-          <button onClick={() => {setModalContent(
-            <ChangeGoalModal taskName={props.taskName} index={props.index}/>
-          )}} 
-          type="button" className={"goal-edit"}>
-          <i class="fas fa-pencil-alt"></i>
-        </button>
-          <button className="button-delete" type="button" onClick={() => {dispatch(transferGoal(props.taskName, props.index))}}>
-            {/* <input className="goal-checkbox" type="checkbox" name="checked" onChange={() => {}}/> */}
-            ✔ Send goals to archive
-          </button>
-        </div>
+        {props.isButtons ?
+          <div className="goal-item_icons">
+            <button onClick={() => {setModalContent(
+              <ChangeGoalModal taskName={props.taskName} index={props.index}/>
+            )}} type="button" className={"goal-edit"}>
+              <i class="fas fa-pencil-alt"></i>
+            </button>
+            <button className="button-delete" type="button" onClick={() => {dispatch(transferGoal(props.taskName, props.index))}}>
+              ✔ Send goals to archive
+            </button>
+          </div> : 
+          <img className="goal-done" src={done} alt={'Done'} />
+      }
       </StyledGoal>
     )
 }  

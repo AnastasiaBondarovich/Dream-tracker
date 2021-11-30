@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { memo, useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { ModalContext } from 'HOC/GlobalModalProvider';
-import { choosePicture } from '../../../api/apiBoards';
 import LibraryModal from './LibraryModal';
 
 const StyledChoosePicturesModal = styled.div`
@@ -90,7 +89,7 @@ const ChoosePicturesModal = (props) => {
 
   useEffect(() =>{
     pictureForBoard();
-  });
+  }, []);
 
   const pictureForBoard = () =>{
     let allImg = document.querySelector('.result');
@@ -122,12 +121,10 @@ const ChoosePicturesModal = (props) => {
 
         <h5>Choose picture for your board</h5>
 
-        <div className={"result"}>
-          {/* {<Skeleton/> || pictureForBoard()} */}
-        </div>
+        <div className={"result"}/>
 
         <button onClick={() => {
-          setModalContent(<LibraryModal img={img} category={props.category}/>), console.log('category!!!', props.category)}} 
+          setModalContent(<LibraryModal img={img} category={props.category}/>)}} 
           type="button" className={'button-save'}> Save </button>
       </div>
 
@@ -135,4 +132,4 @@ const ChoosePicturesModal = (props) => {
   );
 };
 
-export default ChoosePicturesModal;
+export default memo(ChoosePicturesModal);

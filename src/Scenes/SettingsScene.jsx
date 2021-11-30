@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { ModalContext } from 'HOC/GlobalModalProvider';
 import { useDispatch, useSelector } from 'react-redux';
 import { usersSelector } from '../store/selectors/users';
 import { useHistory } from 'react-router';

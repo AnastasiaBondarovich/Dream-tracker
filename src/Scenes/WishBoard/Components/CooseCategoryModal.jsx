@@ -61,7 +61,9 @@ const StyledChooseCategoryModal = styled.div`
   .buttons-categories_family,
   .buttons-categories_lifestyle,
   .buttons-categories_travel,
-  .buttons-categories_home {
+  .buttons-categories_home,
+  .buttons-categories_financial,
+  .buttons-categories_luxury {
     display: block;
     margin-bottom: 30px;
   }
@@ -144,9 +146,9 @@ const ChooseCategoryModal = () => {
       <h3>My Wish board</h3>
 
       <div className={'title-categories'}>
-         <h5>Choose сategories of wishes for your board</h5>
+        <h5>Choose сategories of wishes for your board</h5>
 
-      <span>*You must select an even number of categories</span>
+        <span>*You must select an even number of categories</span>
       </div>
 
       <div className={'buttons-categories'}>
@@ -156,12 +158,17 @@ const ChooseCategoryModal = () => {
             console.log(values);
             chooseCategory(values.checked).then(({ data }) => {
               console.log('addCategory', data);
-            }); setModalContent(false);
+            });
+            setModalContent(false);
           }}
           validate={(formObj) => {
             const errorObj = {};
-            console.log('formObj', formObj)
-            if (formObj.checked.length % 2) return {checked: [], errorObj: 'Please mark even amount of categories'}            
+            console.log('formObj', formObj);
+            if (formObj.checked.length % 2)
+              return {
+                checked: [],
+                errorObj: 'Please mark even amount of categories',
+              };
           }}
         >
           <Form>
@@ -214,6 +221,26 @@ const ChooseCategoryModal = () => {
                 <label>
                   <Field type="checkbox" name="checked" value="Fashion" />
                   Fashion
+                </label>
+              </div>
+              <div className={'buttons-categories_financial'}>
+                <label>
+                  <Field type="checkbox" name="checked" value="Quotes" />
+                  Quotes
+                </label>
+                <label>
+                  <Field type="checkbox" name="checked" value="Financial" />
+                  Financial
+                </label>
+              </div>
+              <div className={'buttons-categories_luxury'}>
+                <label>
+                  <Field type="checkbox" name="checked" value="Luxury" />
+                  Luxury
+                </label>
+                <label>
+                  <Field type="checkbox" name="checked" value="Relationships" />
+                  Relationships
                 </label>
               </div>
             </div>

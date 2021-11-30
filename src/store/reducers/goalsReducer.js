@@ -10,7 +10,6 @@ const goalsReducer = (state, action) => {
         taskName: action.payload.taskName,
         index: action.payload.index,
       });
-      console.log('new goals', newGoalsList);
       return { ...state, goals: newGoalsList };
 
     case GOALS_ACTIONS.change:
@@ -26,7 +25,6 @@ const goalsReducer = (state, action) => {
         taskName: action.payload.taskName,
         index: action.payload.index,
       });
-      console.log('archiveGoalsList',  archiveGoalsList)
       return { ...state, goals: newGoalsList, archiveGoals: archiveGoalsList};
       
 

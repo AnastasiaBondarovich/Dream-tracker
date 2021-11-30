@@ -6,8 +6,6 @@ import ChoosePicturesModal from './ChoosePicturesModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { newWishBoard, createWishBoard } from 'store/actions/whishBoard';
 import { wishBoardSelector } from '../../../store/selectors/wishBoard';
-import { tableOfWishes } from '../../../api/apiBoards';
-import FinishedBoard from '../../MainScene/Components/FinishedBoard';
 import { usersSelector } from '../../../store/selectors/users';
 import { Link } from 'react-router-dom';
 import { PATHS, ROUTE } from '../../../Routing/routing';
@@ -88,7 +86,6 @@ const StyledLibraryModal = styled.div`
   }
 
   td {
-    /* padding: 5% 5%; */
     height: 50%;
     width: 30%;
     font-family: 'Roboto', sans-serif;
@@ -116,21 +113,21 @@ const StyledLibraryModal = styled.div`
 const LibraryModal = (props) => {
   const setModalContent = useContext(ModalContext);
   const [category, setCategory] = useState('');
+  const [mounted, setMounted] = useState(true);
   const dispatch = useDispatch();
   const wishList = useSelector(wishBoardSelector);
   const users = useSelector(usersSelector);
   const userID = users.map(user => user.userID);
 
   useEffect(() => {
+    let isMounted = true;
     createTable();
-    console.log('category', category);
-    savePicture();
+    if (isMounted) savePicture();
+    return () => {isMounted = false};
   }, []);
 
   const createTable = () => {
-    console.log('wishList', wishList[0]);
-
-    if (wishList.length === 0) {
+      if (wishList.length === 0) {
       let layout = JSON.parse(localStorage.layoutOfBoard);
       if (layout === 'gorizontal') {
         const color = JSON.parse(localStorage.colorBoard).color;
@@ -158,11 +155,9 @@ const LibraryModal = (props) => {
           button.innerHTML = '<i class="fas fa-plus"></i>';
           button.style.color = `${color}`;
           button.classList.add(res);
-          console.log('wishList', wishList);
         }
         document.querySelector('.table-library').appendChild(table);
         dispatch(newWishBoard(table));
-        // tableOfWishes(table);
       } else {
         const color = JSON.parse(localStorage.colorBoard).color;
         const arrCategories = JSON.parse(localStorage.categoriesBoard).values;
@@ -192,7 +187,6 @@ const LibraryModal = (props) => {
         }
         document.querySelector('.table-library').appendChild(table);
         dispatch(newWishBoard(table));
-        // tableOfWishes(table);
       }
       let tableButtons = document.querySelector('table');
       let buttons = tableButtons.getElementsByTagName('button');
@@ -212,6 +206,7 @@ const LibraryModal = (props) => {
   };
 
   const addPicturesToTable = (searchPicture, category) => {
+    setMounted(!mounted);
     addPictures(searchPicture).then((response) => {
       console.log('response', response.data.hits);
       let imgAll = response.data.hits.map(
@@ -240,8 +235,6 @@ const LibraryModal = (props) => {
         img.classList.add('img-table');
         img.src = `${props.img}`;
         dispatch(newWishBoard(table));
-        // tableOfWishes(table);
-        console.log('tdWithPicture', table);
       }
     }
   };

@@ -82,7 +82,6 @@ const StyledMainScene = styled.div`
 const MainScene = () => {
   const users = useSelector(usersSelector);
   const userID = users.map(user => user.userID);
-  console.log(users);
   const wishList = useSelector(wishBoardSelector);
 
   return (

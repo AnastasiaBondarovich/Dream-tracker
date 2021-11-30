@@ -111,18 +111,8 @@ const StyledMainLayout = styled.div`
 const MainLayout = (props) => {
   const users = useSelector(usersSelector);
   const userList = JSON.parse(localStorage.registeredUsersList);
-  // const urlParams = useParams();
-  // const urlParamsId = urlParams.userID;
-  // console.log('urlParamsId', urlParamsId);
   const userID = users.map(user => user.userID);
-  // let id = useLocation().pathname.substring(23);
   const userData = userList.find(user => user.userID == userID);  
-
-
-  // console.log('mainscene', id);
-  // const userData = users.find(user => user.userID === userID || id);  
-  // console.log('mainscene1', userData)
-  
 
   return (
     <StyledMainLayout>
@@ -163,8 +153,6 @@ const MainLayout = (props) => {
         <div className={'content'}>
           {props.children}
         </div>
-
-        {/* <div className={'footer'}>Footer</div> */}
       </div>
     </StyledMainLayout>
   )

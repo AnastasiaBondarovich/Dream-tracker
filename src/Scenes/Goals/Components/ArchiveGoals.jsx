@@ -83,25 +83,11 @@ const StyleArchiveGoals = styled.div`
 
 const ArchiveGoals = (props) => {
   const goalsList = useSelector(archiveGoalsSelector);
-  const dispatch = useDispatch();
   const setModalContent = useContext(ModalContext);
-  const [newTaskName, setNewTaskName] = useState('');
-  const [searchGoal, setSearchGoal] = useState('');
-
-  useEffect(() => {
-    deleteButtons();
-  }, []);
-
-  const deleteButtons = () => {
-    const buttons = document.getElementsByClassName('goal-item_icons');
-    while (buttons.length > 0) {
-      buttons[0].remove();
-    }
-  };
 
   return (
     <StyleArchiveGoals>
-       <button
+      <button
         onClick={() => {
           setModalContent(false);
         }}
@@ -119,8 +105,8 @@ const ArchiveGoals = (props) => {
           <li className={'goals-item'}>
             {goalsList.map((task, index) => {
               return (
-                <div key={task.taskName}>
-                  <Goal taskName={task.taskName} index={index} />
+                <div key={index}>
+                  <Goal taskName={task.taskName} index={index} isButtons={false}/>
                 </div>
               );
             })}
