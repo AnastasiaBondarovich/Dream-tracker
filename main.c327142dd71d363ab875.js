@@ -4243,7 +4243,6 @@ var RootRouter = function RootRouter(props) {
   var userID = users.map(function (user) {
     return user.userID;
   });
-  console.log('location', history.location, users);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
     exact: true,
     path: _routing__WEBPACK_IMPORTED_MODULE_8__.ROUTE.Account
@@ -4402,7 +4401,7 @@ var ArchiveGoals = function ArchiveGoals(props) {
     className: 'goals-item'
   }, goalsList.map(function (task, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-      key: task.taskName
+      key: index
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Goal__WEBPACK_IMPORTED_MODULE_4__["default"], {
       taskName: task.taskName,
       index: index,
@@ -4747,7 +4746,7 @@ var GoalsScene = function GoalsScene(props) {
     className: 'goals-item'
   }, filterListGoals(goalsList).map(function (task, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
-      key: task.taskName
+      key: index
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_Components_Goal__WEBPACK_IMPORTED_MODULE_4__["default"], {
       taskName: task.taskName,
       index: index,
@@ -5911,7 +5910,7 @@ var ChoosePicturesModal = function ChoosePicturesModal(props) {
       setModalContent( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_LibraryModal__WEBPACK_IMPORTED_MODULE_3__["default"], {
         img: img,
         category: props.category
-      })), console.log('category!!!', props.category);
+      }));
     },
     type: "button",
     className: 'button-save'
@@ -5921,12 +5920,13 @@ var ChoosePicturesModal = function ChoosePicturesModal(props) {
 _s(ChoosePicturesModal, "ZLFAKXB+oagfGa6jiOXlv5S+VAc=");
 
 _c2 = ChoosePicturesModal;
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ChoosePicturesModal);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_c3 = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_1__.memo)(ChoosePicturesModal));
 
-var _c, _c2;
+var _c, _c2, _c3;
 
 __webpack_require__.$Refresh$.register(_c, "StyledChoosePicturesModal");
 __webpack_require__.$Refresh$.register(_c2, "ChoosePicturesModal");
+__webpack_require__.$Refresh$.register(_c3, "%default%");
 
 const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
 const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
@@ -6174,6 +6174,11 @@ var LibraryModal = function LibraryModal(props) {
       category = _useState2[0],
       setCategory = _useState2[1];
 
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(true),
+      _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState3, 2),
+      mounted = _useState4[0],
+      setMounted = _useState4[1];
+
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_5__.useDispatch)();
   var wishList = (0,react_redux__WEBPACK_IMPORTED_MODULE_5__.useSelector)(_store_selectors_wishBoard__WEBPACK_IMPORTED_MODULE_7__.wishBoardSelector);
   var users = (0,react_redux__WEBPACK_IMPORTED_MODULE_5__.useSelector)(_store_selectors_users__WEBPACK_IMPORTED_MODULE_8__.usersSelector);
@@ -6181,14 +6186,15 @@ var LibraryModal = function LibraryModal(props) {
     return user.userID;
   });
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    var isMounted = true;
     createTable();
-    console.log('category', category);
-    savePicture();
+    if (isMounted) savePicture();
+    return function () {
+      isMounted = false;
+    };
   }, []);
 
   var createTable = function createTable() {
-    console.log('wishList', wishList[0]);
-
     if (wishList.length === 0) {
       var layout = JSON.parse(localStorage.layoutOfBoard);
 
@@ -6219,7 +6225,6 @@ var LibraryModal = function LibraryModal(props) {
           button.innerHTML = '<i class="fas fa-plus"></i>';
           button.style.color = "".concat(color);
           button.classList.add(res);
-          console.log('wishList', wishList);
         }
 
         document.querySelector('.table-library').appendChild(table);
@@ -6284,6 +6289,7 @@ var LibraryModal = function LibraryModal(props) {
   };
 
   var addPicturesToTable = function addPicturesToTable(searchPicture, category) {
+    setMounted(!mounted);
     (0,_api_instance__WEBPACK_IMPORTED_MODULE_3__.addPictures)(searchPicture).then(function (response) {
       console.log('response', response.data.hits);
       var imgAll = response.data.hits.map(function (item) {
@@ -6339,7 +6345,7 @@ var LibraryModal = function LibraryModal(props) {
   }, "Save"))));
 };
 
-_s(LibraryModal, "slvAWz+BC43D4mSoh6GeSh00Cfo=", false, function () {
+_s(LibraryModal, "5XCv2exEqcbPFYSC1BrnMOHK8qw=", false, function () {
   return [react_redux__WEBPACK_IMPORTED_MODULE_5__.useDispatch, react_redux__WEBPACK_IMPORTED_MODULE_5__.useSelector, react_redux__WEBPACK_IMPORTED_MODULE_5__.useSelector];
 });
 
@@ -6619,7 +6625,6 @@ window.localStorage.setItem('registeredUsersList', JSON.stringify([]));
 var registerUser = function registerUser(login, email, password) {
   return new Promise(function (resolve, reject) {
     var usersList = JSON.parse(window.localStorage.getItem('registeredUsersList'));
-    console.log('function', usersList);
     if (!usersList) usersList = [];
     var userID = Math.floor(Math.random() * 10000);
     usersList.push({
@@ -6637,13 +6642,12 @@ var registerUser = function registerUser(login, email, password) {
 var logInUser = function logInUser(email, password) {
   return new Promise(function (resolve, reject) {
     var usersList = JSON.parse(window.localStorage.getItem('registeredUsersList'));
-    console.log('log', usersList);
     if (!usersList) reject('Error');
+    console.log('userList', usersList);
     var userData = usersList.find(function (user) {
       return user.email === email && user.password === password;
     });
     var userID = userData.userID;
-    console.log('log3', userID);
 
     if (userData) {
       resolve({
@@ -61904,4 +61908,4 @@ function toString(value) {
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=main.c9a8d414a87c107d89d4.js.map
+//# sourceMappingURL=main.c327142dd71d363ab875.js.map
